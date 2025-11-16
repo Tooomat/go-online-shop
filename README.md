@@ -67,6 +67,7 @@ Online Shop sederhana menggunakan bahasa pemrograman Golang dengan pendekatan DD
 entity.go, repository.go, service.go, handler.go, dll.
 - Layer seperti handler/service/repo ada di dalam satu domain.
 
+```
 go-online-shop/
 ├── apps/                       # Domain modules
 │   ├── auth/                   # Domain Auth
@@ -101,7 +102,7 @@ go-online-shop/
 ├── test/                       # Unit & integration tests
 │
 └── utility/                    # Utility global (JWT token, helpers, etc)
-
+```
 
 ---
 
