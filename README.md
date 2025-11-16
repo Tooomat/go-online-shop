@@ -24,7 +24,7 @@ Online Shop sederhana menggunakan bahasa pemrograman Golang dengan pendekatan DD
 --- 
 
 ## go modul
-- [yamlv3]
+- [yamlv3](gopkg.in/yaml.v3)
 - [sqlx](github.com/jmoiron/sqlx), [driver_mysql](github.com/go-sql-driver/mysql)
 - [fiber/v2](github.com/gofiber/fiber/v2)
 - [bcrypt](golang.org/x/crypto/bcrypt)
@@ -67,7 +67,7 @@ Online Shop sederhana menggunakan bahasa pemrograman Golang dengan pendekatan DD
 entity.go, repository.go, service.go, handler.go, dll.
 - Layer seperti handler/service/repo ada di dalam satu domain.
 
-go-online-shop
+go-online-shop/
 ├───apps/
 │   ├───auth/               # Modul domain auth: handler, repo, service, dll
 │   ├───product/            
