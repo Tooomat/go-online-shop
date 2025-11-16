@@ -1,0 +1,66 @@
+# Mengatur hubungan antara Go App, MySQL, dan Redis
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: go-online-shop-db
+    environment:
+      - MYSQL_ROOT_HOST=%
+      # - MYSQL_USER=
+      # - MYSQL_PASSWORD=
+      # - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=go_online_shop
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    
+  redis:
+    image: redis:8
+    container_name: go-online-shop-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./internal/configs/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+      
+  app:
+    build:
+      context: ./
+    container_name: go-online-shop
+    ports:
+      - "8080:8080"
+    depends_on:
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy 
+
+    restart: unless-stopped
+  
+  test:
+  # docker compose up test -d --build
+  # docker exec -it go-online-shop sh
+  # go test ./apps/auth -v
+    image: golang:1.25-alpine
+    container_name: go-online-shop-test
+    working_dir: /app
+    volumes: 
+      - .:/app
+    command: go test ./apps/auth ./apps/product ./apps/transaction -v
+    depends_on:
+      redis:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    
+volumes:
+  mysql_data:

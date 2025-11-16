@@ -1,0 +1,3 @@
+JWT_SECRET=mysecretkey
+API_KEY=supersecretapikey
+CORS_ALLOW_ORIGINS=

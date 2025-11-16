@@ -1,0 +1,26 @@
+app:
+  name: go-online-shop
+  port: ":8080"
+  encryption:
+    salt: 10
+    jwt_access_secret: ${JWT_ACCESS_SECRET}
+    jwt_refresh_secret: ${JWT_REFRESH_SECRET}
+    
+db:
+  # host: 127.0.0.1
+  host: mysql
+  port: "3306"
+  user: "root"
+  password: ""
+  name: "go_online_shop"
+  connection_pool:
+    max_idle_connection: 10
+    max_open_connection: 30
+    max_life_time_connection: 30   # dalam menit (misal 30 menit)
+    max_idle_time_connection: 10   # dalam menit (misal 10 menit)
+
+redis:
+  # addr: "127.0.0.1:6379"
+  addr: redis:6379
+  password: ""
+  db0: 0
