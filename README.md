@@ -68,27 +68,40 @@ entity.go, repository.go, service.go, handler.go, dll.
 - Layer seperti handler/service/repo ada di dalam satu domain.
 
 go-online-shop/
-├───apps/
-│   ├───auth/               # Modul domain auth: handler, repo, service, dll
-│   ├───product/            
-│   └───transaction/
-├───cmd/                    # entry point untuk menjalankan server (main.go)
-│   └───api/
-├───external/               # database connection redis, mysql, postgre, dll
-│   ├───cache/
-│   └───database/
-├───infrastructure/         # layer infrastructure (HTTP response, middlerware, dll)
-│   ├───http/
-│   │   └───fiber/
-│   ├───middleware/
-│   └───response/
-├───internal/               # konfigurasi environment & app
-│   ├───configs/
-│   └───log/
-├───sql/                    # query sql dan migrations
-│   └───queries/
-├───test/
-└───utility/                # utility umum (token, dll)
+├── apps/                       # Domain modules
+│   ├── auth/                   # Domain Auth
+│   │   ├── entity.go
+│   │   ├── repository.go
+│   │   ├── service.go
+│   │   └── handler.go
+│   ├── product/                # Domain Product
+│   └── transaction/            # Domain Transaction
+│
+├── cmd/                        # Entry point (bootstrap)
+│   └── api/
+│       └── main.go             # Start HTTP server
+│
+├── external/                   # External services (DB, cache, third-party)
+│   ├── cache/                  # Redis, in-memory cache
+│   └── database/               # MySQL/PostgreSQL config & connection
+│
+├── infrastructure/             # Infrastructure layer
+│   ├── http/
+│   │   └── fiber/              # HTTP framework adapters (Fiber)
+│   ├── middleware/             # Auth middleware, rate limiter, etc.
+│   └── response/               # Standardized API responses
+│
+├── internal/                   # Internal configs (cannot be imported from outside)
+│   ├── configs/                # Environment loader
+│   └── log/                    # Logger setup
+│
+├── sql/                        # SQL migrations & queries
+│   └── queries/
+│
+├── test/                       # Unit & integration tests
+│
+└── utility/                    # Utility global (JWT token, helpers, etc)
+
 
 ---
 
